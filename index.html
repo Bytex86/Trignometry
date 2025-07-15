@@ -1,0 +1,410 @@
+<!--
+let us assume a unit length circle with x arc lenth and radius (x will be input)
+
+then vertical distance is sinx 
+horizontal distance is cosx
+
+now, let us assume some points on the boundary of the circle (considering origin in middle)
+a(1,0) b(0,1) c(-1,0) d(0,-1)
+
+when x=0degree (P is at A)
+p(cosx,sinx) = A(1,0)
+this implies cos0 = 1 sin0 = 0
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit Circle Trigonometry</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            flex: 1;
+        }
+        
+        h1 {
+            text-align: center;
+            color: white;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .left-panel {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .right-panel {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .method-explanation {
+            background: rgba(240, 248, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #4a90e2;
+        }
+        
+        .method-explanation h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .method-explanation p {
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        
+        .input-section {
+            margin-bottom: 20px;
+        }
+        
+        .input-section label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .input-section input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .input-section input:focus {
+            outline: none;
+            border-color: #4a90e2;
+        }
+        
+        .results {
+            background: rgba(230, 255, 230, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        
+        .results h3 {
+            color: #27ae60;
+            margin-bottom: 15px;
+        }
+        
+        .result-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+            border-left: 3px solid #27ae60;
+        }
+        
+        .circle-container {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            margin: 20px auto;
+        }
+        
+        .circle-svg {
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+        
+        .coordinates {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .point-info {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            text-align: center;
+        }
+        
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: auto;
+        }
+        
+        footer p {
+            font-size: 16px;
+        }
+        
+        .heart {
+            color: #e74c3c;
+            font-size: 1.2em;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .circle-container {
+                width: 300px;
+                height: 300px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Unit Circle Trigonometry</h1>
+        
+<div class="main-content">
+    <div class="left-panel">
+        <div class="method-explanation">
+            <h2>Method Explanation</h2>
+            <p><strong>We consider a unit circle</strong> a circle with radius and arc length 1 and centered at the origin (0, 0).</p>
+            <p><strong>Any point P on its boundary at angle <em>x</em></strong> has coordinates: <br>
+            <code>P = (cos(x), sin(x))</code></p>
+            <p><strong>Thus:</strong></p>
+            <ul>
+                <li>Vertical distance from origin: <code>sin(x)</code></li>
+                <li>Horizontal distance from origin: <code>cos(x)</code></li>
+            </ul>
+
+            <p><strong>Key boundary points:</strong> A(1,0), B(0,1), C(-1,0), D(0,-1)</p>
+
+            <p><strong>When x = <span id="dynamicAngle">0°</span> (P is at <span id="dynamicPosition">A</span>):</strong></p>
+            <ul>
+                <li><code>P = (cos(x), sin(x)) = <span id="dynamicPoint">A(1, 0)</span></code></li>
+                <li><code>cos(<span id="dynamicAngle2">0°</span>) = <span id="dynamicCos">1</span></code></li>
+                <li><code>sin(<span id="dynamicAngle3">0°</span>) = <span id="dynamicSin">0</span></code></li>
+            </ul>
+
+            <p id="quadrantInfo"><strong>Point P is in:</strong> <span id="currentQuadrant">Quadrant I (0° to 90°)</span></p>
+        </div>
+
+        <div class="input-section">
+            <label for="angleInput">Enter Angle (in degrees):</label>
+            <input type="number" id="angleInput" value="0" min="0" max="360" step="1">
+        </div>
+
+        <div class="results">
+            <h3>Calculated Values:</h3>
+            <div class="result-item"><strong>Angle:</strong> <span id="angleResult">0°</span></div>
+            <div class="result-item"><strong>cos(x):</strong> <span id="cosResult">1</span></div>
+            <div class="result-item"><strong>sin(x):</strong> <span id="sinResult">0</span></div>
+            <div class="result-item"><strong>Point P:</strong> <span id="pointResult">(1, 0)</span></div>
+        </div>
+    </div>
+
+    <div class="right-panel">
+        <h2>Live Unit Circle</h2>
+        <div class="circle-container">
+            <svg class="circle-svg" viewBox="-220 -220 440 440">>
+                <line x1="-200" y1="0" x2="200" y2="0" stroke="#ddd" stroke-width="1"/>
+                <line x1="0" y1="-200" x2="0" y2="200" stroke="#ddd" stroke-width="1"/>
+
+                <text x="100" y="-100" fill="#666" font-size="14" text-anchor="middle">Quadrant I</text>
+                <text x="-100" y="-100" fill="#666" font-size="14" text-anchor="middle">Quadrant II</text>
+                <text x="-100" y="100" fill="#666" font-size="14" text-anchor="middle">Quadrant III</text>
+                <text x="100" y="100" fill="#666" font-size="14" text-anchor="middle">Quadrant IV</text>
+
+                <circle cx="0" cy="0" r="150" fill="none" stroke="#4a90e2" stroke-width="3"/>
+
+                <line x1="-180" y1="0" x2="180" y2="0" stroke="#333" stroke-width="2"/>
+                <line x1="0" y1="-180" x2="0" y2="180" stroke="#333" stroke-width="2"/>
+
+                <circle cx="150" cy="0" r="4" fill="#e74c3c"/>
+                <text x="165" y="5" fill="#e74c3c" font-size="12">A(1,0)</text>
+
+                <circle cx="0" cy="-150" r="4" fill="#e74c3c"/>
+                <text x="10" y="-145" fill="#e74c3c" font-size="12">B(0,1)</text>
+
+                <circle cx="-150" cy="0" r="4" fill="#e74c3c"/>
+                <text x="-175" y="5" fill="#e74c3c" font-size="12">C(-1,0)</text>
+
+                <circle cx="0" cy="150" r="4" fill="#e74c3c"/>
+                <text x="10" y="165" fill="#e74c3c" font-size="12">D(0,-1)</text>
+
+                <path id="angleArc" fill="none" stroke="#27ae60" stroke-width="2"/>
+
+                <line id="radiusLine" x1="0" y1="0" x2="150" y2="0" stroke="#27ae60" stroke-width="3"/>
+
+                <circle id="pointP" cx="150" cy="0" r="6" fill="#27ae60"/>
+
+                <line id="verticalLine" x1="150" y1="0" x2="150" y2="0" stroke="#f39c12" stroke-width="2" stroke-dasharray="5,5"/>
+                <line id="horizontalLine" x1="0" y1="0" x2="150" y2="0" stroke="#9b59b6" stroke-width="2" stroke-dasharray="5,5"/>
+
+                <text id="pointLabel" x="160" y="-10" fill="#27ae60" font-size="12" font-weight="bold">P(1, 0)</text>
+            </svg>
+        </div>
+
+        <div class="point-info">
+            <div class="coordinates">
+                <div>cos(x) = <span id="cosValue">1.000</span></div>
+                <div>sin(x) = <span id="sinValue">0.000</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+    <footer>
+        <p>Made by Sahas | Special Dhanyavad to Sudeep Sir <span class="heart">❤️</span></p>
+    </footer>
+    
+    <script>
+        const angleInput = document.getElementById('angleInput');
+        const angleResult = document.getElementById('angleResult');
+        const cosResult = document.getElementById('cosResult');
+        const sinResult = document.getElementById('sinResult');
+        const pointResult = document.getElementById('pointResult');
+        const cosValue = document.getElementById('cosValue');
+        const sinValue = document.getElementById('sinValue');
+        
+        const pointP = document.getElementById('pointP');
+        const radiusLine = document.getElementById('radiusLine');
+        const verticalLine = document.getElementById('verticalLine');
+        const horizontalLine = document.getElementById('horizontalLine');
+        const pointLabel = document.getElementById('pointLabel');
+        const angleArc = document.getElementById('angleArc');
+        
+        function updateCircle() {
+            const angle = parseFloat(angleInput.value);
+            const radians = (angle * Math.PI) / 180;
+            const cosVal = Math.cos(radians);
+            const sinVal = Math.sin(radians);
+            
+            angleResult.textContent = angle + '°';
+            cosResult.textContent = cosVal.toFixed(3);
+            sinResult.textContent = sinVal.toFixed(3);
+            pointResult.textContent = `(${cosVal.toFixed(3)}, ${sinVal.toFixed(3)})`;
+            cosValue.textContent = cosVal.toFixed(3);
+            sinValue.textContent = sinVal.toFixed(3);
+            
+            const x = cosVal * 150;
+            const y = -sinVal * 150; 
+            
+            pointP.setAttribute('cx', x);
+            pointP.setAttribute('cy', y);
+            
+            radiusLine.setAttribute('x2', x);
+            radiusLine.setAttribute('y2', y);
+            
+            verticalLine.setAttribute('x1', x);
+            verticalLine.setAttribute('y1', y);
+            verticalLine.setAttribute('x2', x);
+            verticalLine.setAttribute('y2', 0);
+            
+            horizontalLine.setAttribute('x1', 0);
+            horizontalLine.setAttribute('y1', 0);
+            horizontalLine.setAttribute('x2', x);
+            horizontalLine.setAttribute('y2', 0);
+            
+            pointLabel.setAttribute('x', x + 10);
+            pointLabel.setAttribute('y', y - 10);
+            pointLabel.textContent = `P(${cosVal.toFixed(2)}, ${sinVal.toFixed(2)})`;
+
+            document.getElementById('dynamicAngle').textContent = angle + '°';
+            document.getElementById('dynamicAngle2').textContent = angle + '°';
+            document.getElementById('dynamicAngle3').textContent = angle + '°';
+
+            document.getElementById('dynamicCos').textContent = cosVal.toFixed(3);
+            document.getElementById('dynamicSin').textContent = sinVal.toFixed(3);
+            document.getElementById('dynamicPoint').textContent = `(${cosVal.toFixed(3)}, ${sinVal.toFixed(3)})`;
+
+            let position = '';
+            if (angle === 0 || angle === 360) position = 'A(1, 0)';
+            else if (angle === 90) position = 'B(0, 1)';
+            else if (angle === 180) position = 'C(-1, 0)';
+            else if (angle === 270) position = 'D(0, -1)';
+            else position = `(${cosVal.toFixed(3)}, ${sinVal.toFixed(3)})`;
+
+            document.getElementById('dynamicPosition').textContent = position;
+
+            let quadrantText = '';
+            if (angle > 0 && angle < 90) quadrantText = 'Quadrant I (0° to 90°)';
+            else if (angle > 90 && angle < 180) quadrantText = 'Quadrant II (90° to 180°)';
+            else if (angle > 180 && angle < 270) quadrantText = 'Quadrant III (180° to 270°)';
+            else if (angle > 270 && angle < 360) quadrantText = 'Quadrant IV (270° to 360°)';
+            else if (angle === 0 || angle === 360) quadrantText = 'Positive X-Axis (Point A)';
+            else if (angle === 90) quadrantText = 'Positive Y-Axis (Point B)';
+            else if (angle === 180) quadrantText = 'Negative X-Axis (Point C)';
+            else if (angle === 270) quadrantText = 'Negative Y-Axis (Point D)';
+
+            document.getElementById('currentQuadrant').textContent = quadrantText;
+
+            
+            if (angle > 0) {
+                const largeArcFlag = angle > 180 ? 1 : 0;
+                const endX = Math.cos(radians) * 30;
+                const endY = -Math.sin(radians) * 30;
+                angleArc.setAttribute('d', `M 30 0 A 30 30 0 ${largeArcFlag} 0 ${endX} ${endY}`);
+            } else {
+                angleArc.setAttribute('d', '');
+            }
+        }
+        
+        angleInput.addEventListener('input', updateCircle);
+        angleInput.addEventListener('change', updateCircle);
+        
+        updateCircle();
+        
+        document.addEventListener('keydown', function(e) {
+            if (document.activeElement === angleInput) {
+                if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    angleInput.value = Math.min(360, parseInt(angleInput.value) + 1);
+                    updateCircle();
+                } else if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    angleInput.value = Math.max(0, parseInt(angleInput.value) - 1);
+                    updateCircle();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
