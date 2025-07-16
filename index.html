@@ -16,7 +16,7 @@ this implies cos0 = 1 sin0 = 0
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unit Circle with Animated Point</title>
+    <title>Unit Circle Trigonometry</title>
     <style>
         * {
             margin: 0;
@@ -115,49 +115,6 @@ this implies cos0 = 1 sin0 = 0
             border-color: #4a90e2;
         }
         
-        .controls {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        
-        .btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 8px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: bold;
-        }
-        
-        .btn-primary {
-            background: #4a90e2;
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            background: #357abd;
-        }
-        
-        .btn-secondary {
-            background: #95a5a6;
-            color: white;
-        }
-        
-        .btn-secondary:hover {
-            background: #7f8c8d;
-        }
-        
-        .btn-danger {
-            background: #e74c3c;
-            color: white;
-        }
-        
-        .btn-danger:hover {
-            background: #c0392b;
-        }
-        
         .results {
             background: rgba(230, 255, 230, 0.8);
             padding: 20px;
@@ -242,172 +199,131 @@ this implies cos0 = 1 sin0 = 0
 </head>
 <body>
     <div class="container">
-        <h1>Unit Circle with Animated Point</h1>
+        <h1>Unit Circle Trigonometry</h1>
         
-        <div class="main-content">
-            <div class="left-panel">
-                <div class="method-explanation">
-                    <h2>Interactive Unit Circle</h2>
-                    <p><strong>We consider a unit circle</strong> with radius 1 centered at the origin (0, 0).</p>
-                    <p><strong>Any point P on its boundary at angle <em>x</em></strong> has coordinates: <br>
-                    <code>P = (cos(x), sin(x))</code></p>
-                    <p><strong>Current values:</strong></p>
-                    <ul>
-                        <li>Angle: <span id="dynamicAngle">0°</span></li>
-                        <li>cos(x): <span id="dynamicCos">1.000</span></li>
-                        <li>sin(x): <span id="dynamicSin">0.000</span></li>
-                    </ul>
-                    <p><strong>Point P is in:</strong> <span id="currentQuadrant">Quadrant I</span></p>
-                </div>
+<div class="main-content">
+    <div class="left-panel">
+        <div class="method-explanation">
+            <h2>Method Explanation</h2>
+            <p><strong>We consider a unit circle</strong> a circle with radius and arc length 1 and centered at the origin (0, 0).</p>
+            <p><strong>Any point P on its boundary at angle <em>x</em></strong> has coordinates: <br>
+            <code>P = (cos(x), sin(x))</code></p>
+            <p><strong>Thus:</strong></p>
+            <ul>
+                <li>Vertical distance from origin: <code>sin(x)</code></li>
+                <li>Horizontal distance from origin: <code>cos(x)</code></li>
+            </ul>
 
-                <div class="input-section">
-                    <label for="angleInput">Enter Angle (in degrees):</label>
-                    <input type="number" id="angleInput" value="0" min="0" max="360" step="1">
-                </div>
+            <p><strong>Key boundary points:</strong> A(1,0), B(0,1), C(-1,0), D(0,-1)</p>
 
-                <div class="controls">
-                    <button class="btn btn-primary" id="startBtn">Start Animation</button>
-                    <button class="btn btn-secondary" id="pauseBtn">Pause</button>
-                    <button class="btn btn-danger" id="resetBtn">Reset</button>
-                </div>
+            <p><strong>When x = <span id="dynamicAngle">0°</span> (P is at <span id="dynamicPosition">A</span>):</strong></p>
+            <ul>
+                <li><code>P = (cos(x), sin(x)) = <span id="dynamicPoint">A(1, 0)</span></code></li>
+                <li><code>cos(<span id="dynamicAngle2">0°</span>) = <span id="dynamicCos">1</span></code></li>
+                <li><code>sin(<span id="dynamicAngle3">0°</span>) = <span id="dynamicSin">0</span></code></li>
+            </ul>
 
-                <div class="input-section">
-                    <label for="speedInput">Animation Speed:</label>
-                    <input type="range" id="speedInput" min="1" max="10" value="5">
-                    <span id="speedValue">5</span>
-                </div>
+            <p id="quadrantInfo"><strong>Point P is in:</strong> <span id="currentQuadrant">Quadrant I (0° to 90°)</span></p>
+        </div>
 
-                <div class="results">
-                    <h3>Real-time Values:</h3>
-                    <div class="result-item"><strong>Angle:</strong> <span id="angleResult">0°</span></div>
-                    <div class="result-item"><strong>cos(x):</strong> <span id="cosResult">1.000</span></div>
-                    <div class="result-item"><strong>sin(x):</strong> <span id="sinResult">0.000</span></div>
-                    <div class="result-item"><strong>Point P:</strong> <span id="pointResult">(1.000, 0.000)</span></div>
-                </div>
-            </div>
+        <div class="input-section">
+            <label for="angleInput">Enter Angle (in degrees):</label>
+            <input type="number" id="angleInput" value="0" min="0" max="360" step="1">
+        </div>
 
-            <div class="right-panel">
-                <h2>Live Unit Circle</h2>
-                <div class="circle-container">
-                    <svg class="circle-svg" viewBox="-220 -220 440 440">
-                        <!-- Grid lines -->
-                        <line x1="-200" y1="0" x2="200" y2="0" stroke="#ddd" stroke-width="1"/>
-                        <line x1="0" y1="-200" x2="0" y2="200" stroke="#ddd" stroke-width="1"/>
+        <div class="results">
+            <h3>Calculated Values:</h3>
+            <div class="result-item"><strong>Angle:</strong> <span id="angleResult">0°</span></div>
+            <div class="result-item"><strong>cos(x):</strong> <span id="cosResult">1</span></div>
+            <div class="result-item"><strong>sin(x):</strong> <span id="sinResult">0</span></div>
+            <div class="result-item"><strong>Point P:</strong> <span id="pointResult">(1, 0)</span></div>
+        </div>
+    </div>
 
-                        <!-- Quadrant labels -->
-                        <text x="100" y="-100" fill="#666" font-size="14" text-anchor="middle">Quadrant I</text>
-                        <text x="-100" y="-100" fill="#666" font-size="14" text-anchor="middle">Quadrant II</text>
-                        <text x="-100" y="100" fill="#666" font-size="14" text-anchor="middle">Quadrant III</text>
-                        <text x="100" y="100" fill="#666" font-size="14" text-anchor="middle">Quadrant IV</text>
+    <div class="right-panel">
+        <h2>Live Unit Circle</h2>
+        <div class="circle-container">
+            <svg class="circle-svg" viewBox="-220 -220 440 440">>
+                <line x1="-200" y1="0" x2="200" y2="0" stroke="#ddd" stroke-width="1"/>
+                <line x1="0" y1="-200" x2="0" y2="200" stroke="#ddd" stroke-width="1"/>
 
-                        <!-- Unit circle -->
-                        <circle cx="0" cy="0" r="150" fill="none" stroke="#4a90e2" stroke-width="3"/>
+                <text x="100" y="-100" fill="#666" font-size="14" text-anchor="middle">Quadrant I</text>
+                <text x="-100" y="-100" fill="#666" font-size="14" text-anchor="middle">Quadrant II</text>
+                <text x="-100" y="100" fill="#666" font-size="14" text-anchor="middle">Quadrant III</text>
+                <text x="100" y="100" fill="#666" font-size="14" text-anchor="middle">Quadrant IV</text>
 
-                        <!-- Axes -->
-                        <line x1="-180" y1="0" x2="180" y2="0" stroke="#333" stroke-width="2"/>
-                        <line x1="0" y1="-180" x2="0" y2="180" stroke="#333" stroke-width="2"/>
+                <circle cx="0" cy="0" r="150" fill="none" stroke="#4a90e2" stroke-width="3"/>
 
-                        <!-- Key points -->
-                        <circle cx="150" cy="0" r="4" fill="#e74c3c"/>
-                        <text x="165" y="5" fill="#e74c3c" font-size="12">A(1,0)</text>
+                <line x1="-180" y1="0" x2="180" y2="0" stroke="#333" stroke-width="2"/>
+                <line x1="0" y1="-180" x2="0" y2="180" stroke="#333" stroke-width="2"/>
 
-                        <circle cx="0" cy="-150" r="4" fill="#e74c3c"/>
-                        <text x="10" y="-145" fill="#e74c3c" font-size="12">B(0,1)</text>
+                <circle cx="150" cy="0" r="4" fill="#e74c3c"/>
+                <text x="165" y="5" fill="#e74c3c" font-size="12">A(1,0)</text>
 
-                        <circle cx="-150" cy="0" r="4" fill="#e74c3c"/>
-                        <text x="-175" y="5" fill="#e74c3c" font-size="12">C(-1,0)</text>
+                <circle cx="0" cy="-150" r="4" fill="#e74c3c"/>
+                <text x="10" y="-145" fill="#e74c3c" font-size="12">B(0,1)</text>
 
-                        <circle cx="0" cy="150" r="4" fill="#e74c3c"/>
-                        <text x="10" y="165" fill="#e74c3c" font-size="12">D(0,-1)</text>
+                <circle cx="-150" cy="0" r="4" fill="#e74c3c"/>
+                <text x="-175" y="5" fill="#e74c3c" font-size="12">C(-1,0)</text>
 
-                        <!-- Angle arc -->
-                        <path id="angleArc" fill="none" stroke="#27ae60" stroke-width="2"/>
+                <circle cx="0" cy="150" r="4" fill="#e74c3c"/>
+                <text x="10" y="165" fill="#e74c3c" font-size="12">D(0,-1)</text>
 
-                        <!-- Lines to show cos and sin -->
-                        <line id="radiusLine" x1="0" y1="0" x2="150" y2="0" stroke="#27ae60" stroke-width="3"/>
-                        <line id="verticalLine" x1="150" y1="0" x2="150" y2="0" stroke="#f39c12" stroke-width="2" stroke-dasharray="5,5"/>
-                        <line id="horizontalLine" x1="0" y1="0" x2="150" y2="0" stroke="#9b59b6" stroke-width="2" stroke-dasharray="5,5"/>
+                <path id="angleArc" fill="none" stroke="#27ae60" stroke-width="2"/>
 
-                        <!-- Moving point P -->
-                        <circle id="pointP" cx="150" cy="0" r="6" fill="#27ae60"/>
-                        <text id="pointLabel" x="160" y="-10" fill="#27ae60" font-size="12" font-weight="bold">P(1.000, 0.000)</text>
+                <line id="radiusLine" x1="0" y1="0" x2="150" y2="0" stroke="#27ae60" stroke-width="3"/>
 
-                        <!-- Trail path (optional) -->
-                        <path id="trailPath" fill="none" stroke="#27ae60" stroke-width="1" opacity="0.3"/>
-                    </svg>
-                </div>
+                <circle id="pointP" cx="150" cy="0" r="6" fill="#27ae60"/>
 
-                <div class="point-info">
-                    <div class="coordinates">
-                        <div>cos(x) = <span id="cosValue">1.000</span></div>
-                        <div>sin(x) = <span id="sinValue">0.000</span></div>
-                    </div>
-                </div>
+                <line id="verticalLine" x1="150" y1="0" x2="150" y2="0" stroke="#f39c12" stroke-width="2" stroke-dasharray="5,5"/>
+                <line id="horizontalLine" x1="0" y1="0" x2="150" y2="0" stroke="#9b59b6" stroke-width="2" stroke-dasharray="5,5"/>
+
+                <text id="pointLabel" x="160" y="-10" fill="#27ae60" font-size="12" font-weight="bold">P(1, 0)</text>
+            </svg>
+        </div>
+
+        <div class="point-info">
+            <div class="coordinates">
+                <div>cos(x) = <span id="cosValue">1.000</span></div>
+                <div>sin(x) = <span id="sinValue">0.000</span></div>
             </div>
         </div>
     </div>
+</div>
     
     <footer>
-        <p>Made by Sahas | Special Dhanyavad to Sudeep Sir ❤️</p>
+        <p>Made by Sahas | Special Dhanyavad to Sudeep Sir <span class="heart">❤️</span></p>
     </footer>
     
     <script>
         const angleInput = document.getElementById('angleInput');
-        const speedInput = document.getElementById('speedInput');
-        const speedValue = document.getElementById('speedValue');
-        const startBtn = document.getElementById('startBtn');
-        const pauseBtn = document.getElementById('pauseBtn');
-        const resetBtn = document.getElementById('resetBtn');
-
         const angleResult = document.getElementById('angleResult');
         const cosResult = document.getElementById('cosResult');
         const sinResult = document.getElementById('sinResult');
         const pointResult = document.getElementById('pointResult');
         const cosValue = document.getElementById('cosValue');
         const sinValue = document.getElementById('sinValue');
-   
+        
         const pointP = document.getElementById('pointP');
         const radiusLine = document.getElementById('radiusLine');
         const verticalLine = document.getElementById('verticalLine');
         const horizontalLine = document.getElementById('horizontalLine');
         const pointLabel = document.getElementById('pointLabel');
         const angleArc = document.getElementById('angleArc');
-        const trailPath = document.getElementById('trailPath');
         
-        let animationId;
-        let currentAngle = 0;
-        let isAnimating = false;
-        let animationSpeed = 5;
-        let trailPoints = [];
-        
-        function updateCircle(angle) {
- 
-            if (isNaN(angle) || angle === null || angle === undefined) {
-                angle = 0;
-            }
-            angle = parseFloat(angle);
-            if (isNaN(angle)) {
-                angle = 0;
-            }
-            
-            angle = angle % 360;
-            if (angle < 0) angle += 360;
-            
+        function updateCircle() {
+            const angle = parseFloat(angleInput.value);
             const radians = (angle * Math.PI) / 180;
             const cosVal = Math.cos(radians);
             const sinVal = Math.sin(radians);
             
-            angleResult.textContent = angle.toFixed(1) + '°';
+            angleResult.textContent = angle + '°';
             cosResult.textContent = cosVal.toFixed(3);
             sinResult.textContent = sinVal.toFixed(3);
             pointResult.textContent = `(${cosVal.toFixed(3)}, ${sinVal.toFixed(3)})`;
             cosValue.textContent = cosVal.toFixed(3);
             sinValue.textContent = sinVal.toFixed(3);
             
-            document.getElementById('dynamicAngle').textContent = angle.toFixed(1) + '°';
-            document.getElementById('dynamicCos').textContent = cosVal.toFixed(3);
-            document.getElementById('dynamicSin').textContent = sinVal.toFixed(3);
-         
             const x = cosVal * 150;
             const y = -sinVal * 150; 
             
@@ -421,7 +337,7 @@ this implies cos0 = 1 sin0 = 0
             verticalLine.setAttribute('y1', y);
             verticalLine.setAttribute('x2', x);
             verticalLine.setAttribute('y2', 0);
-
+            
             horizontalLine.setAttribute('x1', 0);
             horizontalLine.setAttribute('y1', 0);
             horizontalLine.setAttribute('x2', x);
@@ -429,21 +345,38 @@ this implies cos0 = 1 sin0 = 0
             
             pointLabel.setAttribute('x', x + 10);
             pointLabel.setAttribute('y', y - 10);
-            pointLabel.textContent = `P(${cosVal.toFixed(3)}, ${sinVal.toFixed(3)})`;
+            pointLabel.textContent = `P(${cosVal.toFixed(2)}, ${sinVal.toFixed(2)})`;
+
+            document.getElementById('dynamicAngle').textContent = angle + '°';
+            document.getElementById('dynamicAngle2').textContent = angle + '°';
+            document.getElementById('dynamicAngle3').textContent = angle + '°';
+
+            document.getElementById('dynamicCos').textContent = cosVal.toFixed(3);
+            document.getElementById('dynamicSin').textContent = sinVal.toFixed(3);
+            document.getElementById('dynamicPoint').textContent = `(${cosVal.toFixed(3)}, ${sinVal.toFixed(3)})`;
+
+            let position = '';
+            if (angle === 0 || angle === 360) position = 'A(1, 0)';
+            else if (angle === 90) position = 'B(0, 1)';
+            else if (angle === 180) position = 'C(-1, 0)';
+            else if (angle === 270) position = 'D(0, -1)';
+            else position = `(${cosVal.toFixed(3)}, ${sinVal.toFixed(3)})`;
+
+            document.getElementById('dynamicPosition').textContent = position;
 
             let quadrantText = '';
-            if (angle > 0 && angle < 90) quadrantText = 'Quadrant I';
-            else if (angle > 90 && angle < 180) quadrantText = 'Quadrant II';
-            else if (angle > 180 && angle < 270) quadrantText = 'Quadrant III';
-            else if (angle > 270 && angle < 360) quadrantText = 'Quadrant IV';
-            else if (angle === 0 || angle === 360) quadrantText = 'Positive X-Axis';
-            else if (angle === 90) quadrantText = 'Positive Y-Axis';
-            else if (angle === 180) quadrantText = 'Negative X-Axis';
-            else if (angle === 270) quadrantText = 'Negative Y-Axis';
-            
+            if (angle > 0 && angle < 90) quadrantText = 'Quadrant I (0° to 90°)';
+            else if (angle > 90 && angle < 180) quadrantText = 'Quadrant II (90° to 180°)';
+            else if (angle > 180 && angle < 270) quadrantText = 'Quadrant III (180° to 270°)';
+            else if (angle > 270 && angle < 360) quadrantText = 'Quadrant IV (270° to 360°)';
+            else if (angle === 0 || angle === 360) quadrantText = 'Positive X-Axis (Point A)';
+            else if (angle === 90) quadrantText = 'Positive Y-Axis (Point B)';
+            else if (angle === 180) quadrantText = 'Negative X-Axis (Point C)';
+            else if (angle === 270) quadrantText = 'Negative Y-Axis (Point D)';
+
             document.getElementById('currentQuadrant').textContent = quadrantText;
+
             
-            // Update angle arc
             if (angle > 0) {
                 const largeArcFlag = angle > 180 ? 1 : 0;
                 const endX = Math.cos(radians) * 30;
@@ -452,136 +385,26 @@ this implies cos0 = 1 sin0 = 0
             } else {
                 angleArc.setAttribute('d', '');
             }
-            
-
-            updateTrail(x, y);
         }
         
-        function updateTrail(x, y) {
-
-            if (isNaN(x) || isNaN(y)) {
-                return;
-            }
-            
-            trailPoints.push({x, y});
-            
-
-            if (trailPoints.length > 100) {
-                trailPoints.shift();
-            }
-            
-            // Create path string
-            if (trailPoints.length > 1) {
-                let pathString = `M ${trailPoints[0].x} ${trailPoints[0].y}`;
-                for (let i = 1; i < trailPoints.length; i++) {
-                    pathString += ` L ${trailPoints[i].x} ${trailPoints[i].y}`;
-                }
-                trailPath.setAttribute('d', pathString);
-            }
-        }
+        angleInput.addEventListener('input', updateCircle);
+        angleInput.addEventListener('change', updateCircle);
         
-        function animate() {
-            if (!isAnimating) return;
-            
-            currentAngle += animationSpeed * 0.5;
-            if (currentAngle >= 360) {
-                currentAngle = 0;
-                trailPoints = [];
-            }
-            
-
-            if (isNaN(currentAngle)) {
-                currentAngle = 0;
-            }
-            
-            angleInput.value = Math.round(currentAngle * 10) / 10; 
-            updateCircle(currentAngle);
-            
-            animationId = requestAnimationFrame(animate);
-        }
+        updateCircle();
         
-        function startAnimation() {
-            if (!isAnimating) {
-                isAnimating = true;
-                startBtn.textContent = 'Running...';
-                startBtn.disabled = true;
-                pauseBtn.disabled = false;
-                animate();
-            }
-        }
-        
-        function pauseAnimation() {
-            isAnimating = false;
-            if (animationId) {
-                cancelAnimationFrame(animationId);
-            }
-            startBtn.textContent = 'Resume';
-            startBtn.disabled = false;
-            pauseBtn.disabled = true;
-        }
-        
-        function resetAnimation() {
-            pauseAnimation();
-            currentAngle = 0;
-            angleInput.value = 0;
-            trailPoints = [];
-            trailPath.setAttribute('d', '');
-            updateCircle(0);
-            startBtn.textContent = 'Start Animation';
-        }
-        
-        // Event listeners
-        angleInput.addEventListener('input', function() {
-            let angle = parseFloat(this.value);
-            if (isNaN(angle)) {
-                angle = 0;
-                this.value = 0;
-            }
-            currentAngle = angle;
-            updateCircle(angle);
-        });
-        
-        angleInput.addEventListener('change', function() {
-            let angle = parseFloat(this.value);
-            if (isNaN(angle)) {
-                angle = 0;
-                this.value = 0;
-            }
-
-            if (angle < 0) {
-                angle = 0;
-                this.value = 0;
-            } else if (angle > 360) {
-                angle = 360;
-                this.value = 360;
-            }
-            currentAngle = angle;
-            updateCircle(angle);
-        });
-        
-        speedInput.addEventListener('input', function() {
-            animationSpeed = parseInt(this.value);
-            speedValue.textContent = animationSpeed;
-        });
-        
-        startBtn.addEventListener('click', startAnimation);
-        pauseBtn.addEventListener('click', pauseAnimation);
-        resetBtn.addEventListener('click', resetAnimation);
-    
         document.addEventListener('keydown', function(e) {
-            if (e.key === ' ') {
-                e.preventDefault();
-                if (isAnimating) {
-                    pauseAnimation();
-                } else {
-                    startAnimation();
+            if (document.activeElement === angleInput) {
+                if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    angleInput.value = Math.min(360, parseInt(angleInput.value) + 1);
+                    updateCircle();
+                } else if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    angleInput.value = Math.max(0, parseInt(angleInput.value) - 1);
+                    updateCircle();
                 }
-            } else if (e.key === 'r' || e.key === 'R') {
-                resetAnimation();
             }
         });
-        updateCircle(0);
-        pauseBtn.disabled = true;
     </script>
 </body>
 </html>
